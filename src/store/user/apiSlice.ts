@@ -1,10 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-interface User {
-  id: string;
-  name: string;
-  // Thêm các thuộc tính khác của người dùng nếu cần
-}
+import { User } from "../../types/user";
 
 // Tạo slice API với RTK Query
 export const apiSlice = createApi({

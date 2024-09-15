@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetUsersQuery } from "../store/apiSlice";
+import { useGetUsersQuery } from "../store/user/apiSlice";
 import { User } from "../types/user";
 
 const ExampleComponent: React.FC = () => {

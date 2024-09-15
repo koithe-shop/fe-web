@@ -7,7 +7,7 @@ interface AdminLayoutProps {
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   return (
     <div>
-      <header>Admin Headeraaaaaaaaaaaa</header>
+      <header>Admin Header</header>
       <aside>Sidebara</aside>
       <div>{children}</div>
       <footer>Admin Footer</footer>
