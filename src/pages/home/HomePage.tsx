@@ -1,14 +1,16 @@
-import React from "react";
-import ExampleComponent from "../../components/ExampleComponent";
+import type { FC } from "react";
+import styles from "./HomePage.module.scss";
 
-const HomePage: React.FC = () => {
+interface HomeProps {
+  children: React.ReactNode;
+}
+
+const Home: FC<HomeProps> = () => {
   return (
-    <div>
-      <h1 className="homeTitle">Home Page</h1>
-      <p>Welcome to the home page!</p>
-      <ExampleComponent />
-    </div>
+    <>
+      <h1 className={styles.homePage}>Home</h1>
+    </>
   );
 };
 
-export default HomePage;
+export default Home;

@@ -1,0 +1,37 @@
+.mainLayout {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Ensure the layout fills the full height of the viewport
+  color: #ffffff;
+  .navSpace {
+    user-select: none;
+    height: 100px;
+    .navCursor {
+      height: 100%;
+      padding: 40px 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      &:hover {
+        cursor: pointer;
+        background-color: #48757e;
+      }
+    }
+  }
+}
+.cursor {
+  font-weight: 700;
+  padding: 0px 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+footer {
+  margin-top: auto; // Pushes the footer to the bottom
+  border-top: 1px solid #ddd;
+  text-align: center;
+  padding: 1rem;
+  background-color: #272d2b; // Optional: add a background color
+}
