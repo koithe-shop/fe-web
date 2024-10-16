@@ -58,7 +58,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </div>
           <div
             className={styles.cursor}
-            onClick={() => handleNavigation("/login")}
+            onClick={() => handleNavigation("a/profile")}
           >
             <Avatar
               style={{ backgroundColor: "#333", verticalAlign: "middle" }}

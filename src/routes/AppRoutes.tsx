@@ -1,25 +1,28 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/home/HomePage";
-import AdminPage from "../pages/AdminPage";
-import NotFoundPage from "../pages/NotFoundPage";
+import NotFoundPage from "../pages/specialPage/NotFoundPage";
 import LoginPage from "../pages/login/LoginPage";
-import UnauthorizedPage from "../pages/UnauthorizedPage";
+import RegisterPage from "../pages/login/RegisterPage";
+import UnauthorizedPage from "../pages/specialPage/UnauthorizedPage";
+import ProfilePage from "../pages/authPage/profile/ProfilePage";
+import ProductAuth from "../pages/authPage/product/Product";
+import OrderAuth from "../pages/authPage/order/Order";
 
-// Import các layout
+// Import layouts
 import MainLayout from "../layouts/MainLayout/MainLayout";
-import AdminLayout from "../layouts/AdminLayout";
 import Product from "../pages/product/Product";
+import AuthLayout from "../layouts/AuthLayout";
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
-      {/* Các trang sử dụng MainLayout */}
+      {/* Public Routes with MainLayout */}
       <Route
         path="/"
         element={
           <MainLayout>
-            <HomePage children={undefined} />
+            <HomePage />
           </MainLayout>
         }
       />
@@ -27,7 +30,7 @@ const AppRoutes: React.FC = () => {
         path="/products"
         element={
           <MainLayout>
-            <Product children={undefined} />
+            <Product />
           </MainLayout>
         }
       />
@@ -39,18 +42,45 @@ const AppRoutes: React.FC = () => {
           </MainLayout>
         }
       />
-
-      <Route>
-        {/* <Route element={<PrivateRoute requiredRole="admin" />}> */}
-        <Route
-          path="/admin"
-          element={
-            <AdminLayout>
-              <AdminPage />
-            </AdminLayout>
-          }
-        />
-      </Route>
+      <Route
+        path="/register"
+        element={
+          <MainLayout>
+            <RegisterPage />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/a/profile"
+        element={
+          <MainLayout>
+            <AuthLayout>
+              <ProfilePage />
+            </AuthLayout>
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/a/product"
+        element={
+          <MainLayout>
+            <AuthLayout>
+              <ProductAuth />
+            </AuthLayout>
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/a/order"
+        element={
+          <MainLayout>
+            <AuthLayout>
+              <OrderAuth />
+            </AuthLayout>
+          </MainLayout>
+        }
+      />
+      {/* Other Routes */}
       <Route path="/unauthorized" element={<UnauthorizedPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

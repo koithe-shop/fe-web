@@ -8,4 +8,5 @@ export default defineConfig({
     port: 3000, // Cấu hình cổng
     open: true, // Mở trình duyệt tự động
   },
+  silenceDeprecations: ["legacy-js-api"],
 });
