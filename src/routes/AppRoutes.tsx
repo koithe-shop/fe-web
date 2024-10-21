@@ -1,21 +1,21 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import HomePage from "../pages/home/HomePage";
 import NotFoundPage from "../pages/specialPage/NotFoundPage";
-import LoginPage from "../pages/login/LoginPage";
-import RegisterPage from "../pages/login/RegisterPage";
 import UnauthorizedPage from "../pages/specialPage/UnauthorizedPage";
+
+import HomePage from "../pages/home/HomePage";
+import LoginPage from "../pages/login/LoginPage";
 import ProfilePage from "../pages/authPage/profile/ProfilePage";
-import ProductAuth from "../pages/authPage/product/Product";
-import OrderAuth from "../pages/authPage/order/Order";
-import ManagementPage from "../pages/dashboard/ManagementPage";
+import Dashboard from "../pages/authPage/dashboard/Dashboard";
+import UserManage from "../pages/authPage/users/UserManage";
+import ProductManagement from "../pages/authPage/products/ProductManagement";
+import OrderManagement from "../pages/authPage/oders/OrderManagement";
+import CouponManage from "../pages/authPage/coupons/CouponManage";
 
 // Import layouts
 import MainLayout from "../layouts/MainLayout/MainLayout";
-import Product from "../pages/product/Product";
 import AuthLayout from "../layouts/AuthLayout";
-import UserManage from "../pages/authPage/UserMana/UserManage";
-import CouponManage from "../pages/authPage/coupon/CouponManage";
+import AuthGuard from "./authGuard";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -23,97 +23,99 @@ const AppRoutes: React.FC = () => {
       <Route
         path="/"
         element={
-          <MainLayout>
-            <HomePage />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="/products"
-        element={
-          <MainLayout>
-            <Product />
-          </MainLayout>
+          <AuthGuard>
+            <MainLayout>
+              <HomePage />
+            </MainLayout>
+          </AuthGuard>
         }
       />
       <Route
         path="/login"
         element={
-          <MainLayout>
-            <LoginPage />
-          </MainLayout>
+          <AuthGuard>
+            <MainLayout>
+              <LoginPage />
+            </MainLayout>
+          </AuthGuard>
         }
       />
       <Route
-        path="/register"
+        path="/auth/profile"
         element={
-          <MainLayout>
-            <RegisterPage />
-          </MainLayout>
+          <AuthGuard>
+            <MainLayout>
+              <AuthLayout>
+                <ProfilePage />
+              </AuthLayout>
+            </MainLayout>
+          </AuthGuard>
         }
       />
       <Route
-        path="/a/profile"
+        path="/auth/dashboard"
         element={
-          <MainLayout>
-            <AuthLayout>
-              <ProfilePage />
-            </AuthLayout>
-          </MainLayout>
+          <AuthGuard>
+            <MainLayout>
+              <AuthLayout>
+                <Dashboard />
+              </AuthLayout>
+            </MainLayout>
+          </AuthGuard>
         }
       />
       <Route
-        path="/a/product"
+        path="/auth/users"
         element={
-          <MainLayout>
-            <AuthLayout>
-              <ProductAuth />
-            </AuthLayout>
-          </MainLayout>
+          <AuthGuard>
+            <MainLayout>
+              <AuthLayout>
+                <UserManage />
+              </AuthLayout>
+            </MainLayout>
+          </AuthGuard>
         }
       />
       <Route
-        path="/a/order"
+        path="/auth/products"
         element={
-          <MainLayout>
-            <AuthLayout>
-              <OrderAuth />
-            </AuthLayout>
-          </MainLayout>
+          <AuthGuard>
+            <MainLayout>
+              <AuthLayout>
+                <ProductManagement />
+              </AuthLayout>
+            </MainLayout>
+          </AuthGuard>
         }
       />
       <Route
-        path="/a/user-manage"
+        path="/auth/orders"
         element={
-          <MainLayout>
-            <AuthLayout>
-              <UserManage />
-            </AuthLayout>
-          </MainLayout>
+          <AuthGuard>
+            <MainLayout>
+              <AuthLayout>
+                <OrderManagement />
+              </AuthLayout>
+            </MainLayout>
+          </AuthGuard>
         }
       />
       <Route
-        path="/a/coupon-manage"
+        path="/auth/coupons"
         element={
-          <MainLayout>
-            <AuthLayout>
-              <CouponManage />
-            </AuthLayout>
-          </MainLayout>
-        }
-      />
-      <Route
-        path="/dashboard"
-        element={
-          <MainLayout>
-            <ManagementPage />
-          </MainLayout>
+          <AuthGuard>
+            <MainLayout>
+              <AuthLayout>
+                <CouponManage />
+              </AuthLayout>
+            </MainLayout>
+          </AuthGuard>
         }
       />
       {/* Other Routes */}
       <Route path="/unauthorized" element={<UnauthorizedPage />} />
       <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+    </Routes >
   );
 };
 

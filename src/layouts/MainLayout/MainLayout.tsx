@@ -1,14 +1,14 @@
 import React from "react";
-import { Avatar, Badge, Flex, Typography, Space } from "antd";
-import { useNavigate } from "react-router-dom";
 import styles from "./MainLayout.module.scss";
+import { useNavigate } from "react-router-dom";
 import logoKoi from "../../assets/images/koi-the.webp";
+import { Avatar, Flex, Typography, Space, Dropdown, MenuProps } from "antd";
 import {
-  ShoppingCartOutlined,
   UserOutlined,
   FacebookOutlined,
   InstagramOutlined,
   TwitterOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
@@ -19,6 +19,43 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token") || "";
+  const fullName = localStorage.getItem("fullName");
+
+  const items: MenuProps['items'] = [
+    {
+      label: (
+        <span>Welcome, {fullName}</span>
+      ),
+      key: '1',
+    },
+    {
+      label: (
+        <p
+          onClick={() => {
+            navigate("/auth/profile")
+          }}
+        >
+          Profile
+        </p>
+      ),
+      key: "Profile",
+    },
+    {
+      label: (
+        <p
+          onClick={() => {
+            localStorage.clear();
+            navigate("/login")
+          }}
+        >
+          Logout
+        </p>
+      ),
+      key: 'Logout',
+      icon: <LogoutOutlined />,
+    },
+  ];
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -39,47 +76,28 @@ export default function MainLayout({ children }: MainLayoutProps) {
             className={styles.logo}
           />
           <nav className={styles.nav}>
-            {/* <div
-              className={styles.navItem}
-              onClick={() => handleNavigation("/")}
-            >
-              Home
-            </div> */}
-            {/* <div
-              className={styles.navItem}
-              onClick={() => handleNavigation("/products")}
-            >
-              Products
-            </div> */}
-            <div
-              className={styles.navItem}
-              onClick={() => handleNavigation("/login")}
-            >
-              Login
-            </div>
-            {/* <div
-              className={styles.navItem}
-              onClick={() => handleNavigation("a/profile")}
-            >
-              <Avatar
-                style={{ backgroundColor: "#48757e", verticalAlign: "middle" }}
-                size="large"
-                icon={<UserOutlined />}
-              />
-            </div> */}
-            {/* <div
-              className={styles.navItem}
-              onClick={() => handleNavigation("/")}
-            >
-              <Badge count={2} color="#48757e">
-                <ShoppingCartOutlined className={styles.cartIcon} />
-              </Badge>
-            </div> */}
+            {!token &&
+              <div
+                className={styles.navItem}
+                onClick={() => handleNavigation("/login")}
+              >
+                Login
+              </div>
+            }
+            {token && <Dropdown menu={{ items }} placement="bottomRight">
+              <div className={styles.navItem}>
+                <Avatar
+                  style={{ backgroundColor: "#48757e", verticalAlign: "middle" }}
+                  size="large"
+                  icon={<UserOutlined />}
+                />
+              </div>
+            </Dropdown>}
           </nav>
         </Flex>
       </header>
       <main className={styles.main}>{children}</main>
-      <footer className={styles.footer}>
+      {!token && <footer className={styles.footer}>
         <div className={styles.footerContent}>
           <div className={styles.footerLeft}>
             <img src={logoKoi} alt="Logo" className={styles.footerLogo} />
@@ -102,7 +120,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <div className={styles.copyright}>
           <Text className={styles.copyrightText}>&copy; 2024 Koi Fish Store. All rights reserved.</Text>
         </div>
-      </footer>
+      </footer>}
     </div>
   );
 }
