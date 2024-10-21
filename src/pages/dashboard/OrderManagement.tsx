@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Table, Tag, Spin, Alert } from "antd";
-import { useGetOrdersQuery } from "../../store/user/apiSlice";
+import { useGetOrdersQuery } from "../../store/product/apiSlice";
 
 const OrderManagement: React.FC = () => {
   const { data: orders, error, isLoading } = useGetOrdersQuery();
