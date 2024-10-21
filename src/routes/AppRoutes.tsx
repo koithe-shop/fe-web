@@ -8,6 +8,7 @@ import UnauthorizedPage from "../pages/specialPage/UnauthorizedPage";
 import ProfilePage from "../pages/authPage/profile/ProfilePage";
 import ProductAuth from "../pages/authPage/product/Product";
 import OrderAuth from "../pages/authPage/order/Order";
+import ManagementPage from "../pages/dashboard/ManagementPage";
 
 // Import layouts
 import MainLayout from "../layouts/MainLayout/MainLayout";
@@ -98,6 +99,14 @@ const AppRoutes: React.FC = () => {
             <AuthLayout>
               <CouponManage />
             </AuthLayout>
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <MainLayout>
+            <ManagementPage />
           </MainLayout>
         }
       />
