@@ -3,7 +3,7 @@ import { User } from "../../types/type";
 
 // Tạo slice API với RTK Query
 export const userSlice = createApi({
-  reducerPath: "api",
+  reducerPath: "userapi",
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_BASE_URL }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], void>({

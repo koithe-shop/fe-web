@@ -16,6 +16,7 @@ export interface User {
   createdAt: string;
   updatedAt: string;
 }
+
 export interface Coupon {
   _id: string;
   couponName: string;
@@ -25,4 +26,8 @@ export interface Coupon {
   discountRate: number;
   status: number;
   description: string;
+}
+
+export interface JwtPayload {
+  [key: string]: any;
 }

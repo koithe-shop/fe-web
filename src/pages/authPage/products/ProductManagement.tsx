@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table, Button, Spin, Alert, Modal, Form, Input, Upload, Select } from "antd";
-import { useGetProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation } from "../../store/product/apiSlice";
-import { Product } from "../../types/product";
+import { useGetProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation } from "../../../store/product/apiSlice";
+import { Product } from "../../../types/product";
 
 const { Option } = Select;
 

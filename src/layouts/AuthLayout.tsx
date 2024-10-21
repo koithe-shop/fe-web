@@ -1,11 +1,10 @@
 import { ConfigProvider, Layout, Menu } from "antd";
 import {
-  UserOutlined,
   ShoppingCartOutlined,
-  TagsOutlined,
   TagOutlined,
-  TeamOutlined,
   UsergroupAddOutlined,
+  LineChartOutlined,
+  ProductOutlined,
 } from "@ant-design/icons";
 import { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
@@ -21,40 +20,39 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
 
   const menuItems = [
     {
-      key: "profile",
-      icon: <UserOutlined />,
-      label: "Profile",
-      onClick: () => navigate("/a/profile"),
+      key: "/auth/dashboard",
+      icon: <LineChartOutlined />,
+      label: "Dashboard",
+      onClick: () => navigate("/auth/dashboard"),
     },
     {
-      key: "order",
+      key: "/auth/users",
+      icon: <UsergroupAddOutlined />,
+      label: "Users",
+      onClick: () => navigate("/auth/users"),
+    },
+    {
+      key: "/auth/products",
+      icon: <ProductOutlined />,
+      label: "Products",
+      onClick: () => navigate("/auth/products"),
+    },
+    {
+      key: "/auth/orders",
       icon: <ShoppingCartOutlined />,
-      label: "Order",
-      onClick: () => navigate("/a/order"),
+      label: "Orders",
+      onClick: () => navigate("/auth/orders"),
     },
     {
-      key: "product",
-      icon: <TagsOutlined />, // Changed icon
-      label: "Product",
-      onClick: () => navigate("/a/product"),
-    },
-    {
-      key: "couponManage",
-      icon: <TagOutlined />, // Changed icon
-      label: "Coupon Manage",
-      onClick: () => navigate("/a/coupon-manage"),
-    },
-
-    {
-      key: "User Manage",
-      icon: <UsergroupAddOutlined />, // Changed icon
-      label: "User Manage",
-      onClick: () => navigate("/a/user-manage"),
+      key: "/auth/coupons",
+      icon: <TagOutlined />,
+      label: "Coupons",
+      onClick: () => navigate("/auth/coupons"),
     },
   ];
 
   return (
-    <Layout style={{ padding: "0px 0px", minHeight: "100vh" }}>
+    <Layout style={{ padding: "0px 0px", minHeight: "calc(100vh - 80px)" }}>
       <Sider width={300}>
         <ConfigProvider
           theme={{
@@ -73,7 +71,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
         >
           <Menu
             mode="inline"
-            defaultSelectedKeys={["profile"]}
+            defaultSelectedKeys={["/auth/dashboard"]}
             style={{
               height: "100%",
               backgroundColor: "#4d5652",
@@ -83,8 +81,8 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
           />
         </ConfigProvider>
       </Sider>
-      <Layout style={{ padding: "0 24px" }}>
-        <Content style={{ padding: "0 10px" }}>{children}</Content>
+      <Layout>
+        <Content style={{ padding: "2%" }}>{children}</Content>
       </Layout>
     </Layout>
   );

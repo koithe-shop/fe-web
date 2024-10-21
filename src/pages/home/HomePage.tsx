@@ -1,5 +1,4 @@
-import React from "react";
-import { Typography, Card, Row, Col, Button, Divider } from "antd";
+import { Typography, Card, Row, Col, Divider } from "antd";
 import styles from "./HomePage.module.scss";
 import kohaku from "../../assets/images/kohaku.png";
 import sanke from "../../assets/images/sanke.jpg";
@@ -8,7 +7,6 @@ import eat from "../../assets/images/eat.png";
 import health from "../../assets/images/health.png";
 import live from "../../assets/images/live.jpeg";
 import logoKoi from "../../assets/images/koi-the.webp";
-import { useNavigate } from "react-router-dom";
 
 const { Title, Paragraph } = Typography;
 
@@ -59,11 +57,7 @@ const koiVarieties: KoiVariety[] = [
 ];
 
 export default function HomePage() {
-  const navigate = useNavigate();
 
-  const handleNavigation = (path: string) => {
-    navigate(path);
-  };
   return (
     <div className={styles.homePage}>
       <section className={styles.heroSection}>
@@ -72,12 +66,6 @@ export default function HomePage() {
           <Paragraph className={styles.heroText}>
             Khám phá vẻ đẹp và sự quý phái của những chú cá Koi Nhật Bản
           </Paragraph>
-          <Button
-            className={styles.heroContentButton}
-            onClick={() => handleNavigation("/products")}
-          >
-            Xem Sản Phẩm
-          </Button>
         </div>
       </section>
       <section className={styles.introSection}>
