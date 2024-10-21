@@ -1,60 +1,68 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.scss";
+import logoKoi from "../../assets/images/koi-the.webp";
+import { useLoginMutation } from "../../store/user/userSlice";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [login, { isLoading, data }] = useLoginMutation();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (username && password) {
-      dispatch(login({ id: "1", name: username, role: "admin" }));
-      navigate("/a/profile");
+      try {
+        const result = await login({ username, password }).unwrap(); // unwrap() để lấy trực tiếp kết quả trả về
+        console.log(result);
+
+        // Kiểm tra kết quả trả về từ API
+        // if (result.message === "Login successful") {
+        //   navigate("/dashboard"); // Điều hướng tới trang dashboard
+        // } else {
+        //   alert("Sai tên người dùng hoặc mật khẩu");
+        // }
+      } catch (error) {
+        console.error("Login error:", error);
+        // alert("Đăng nhập thất bại, vui lòng thử lại.");
+      }
     } else {
-      alert("Vui lòng nhập tên người dùng và mật khẩu");
+      // alert("Vui lòng nhập tên người dùng và mật khẩu");
     }
   };
+
 
   return (
     <div className={styles.loginWrapper}>
       <div className={styles.imageSection}>
         <img
-          src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-1/456964185_3827822390833085_2900098389198244429_n.jpg?stp=cp6_dst-jpg_s200x200&_nc_cat=107&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=RHQuMFwCqnEQ7kNvgEPDWfG&_nc_zt=24&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=AvSJ4BLpcv7obgBVPfuHaJS&oh=00_AYBaK_gn0UNrdf75XwZinUUHBDvvyDwD0wCOvAW5WgWu4A&oe=6713EB15"
+          src={logoKoi}
           alt="Login Illustration"
         />
       </div>
       <div className={styles.formSection}>
-        <h1>Welcome to Koi-Thé</h1>
-        <div className={styles.formGroup}>
-          <label>Username</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-          <div className={styles.registerSpace}>
-            <p
-              onClick={() => {
-                navigate(`/register`);
-              }}
-              className={styles.register}
-            >
-              Register
-            </p>
+        <div>
+          <h1>Welcome to Koi-Thé</h1>
+          <div className={styles.formGroup}>
+            <label>Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
           </div>
           <button onClick={handleLogin}>Login</button>
         </div>

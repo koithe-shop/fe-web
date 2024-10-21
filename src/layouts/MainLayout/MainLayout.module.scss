@@ -8,7 +8,7 @@
 
 .header {
   background-color: #ffffff;
-  padding: 0 30px;
+  padding: 0 10%;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -66,8 +66,7 @@
 }
 
 .footerContent {
-  padding: 40px 40px;
-  margin: 0 auto;
+  padding: 40px 10%;
   display: flex;
   justify-content: space-between;
 }
@@ -137,10 +136,13 @@
 
 .copyright {
   text-align: center;
-  padding-top: 20px;
+  padding: 20px;
   margin-top: 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #bdc3c7;
+}
+
+.copyrightText {
+  color: white;
 }
 
 @media (max-width: 768px) {
