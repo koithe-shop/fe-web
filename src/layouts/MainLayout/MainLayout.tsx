@@ -39,25 +39,25 @@ export default function MainLayout({ children }: MainLayoutProps) {
             className={styles.logo}
           />
           <nav className={styles.nav}>
-            <div
+            {/* <div
               className={styles.navItem}
               onClick={() => handleNavigation("/")}
             >
               Home
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className={styles.navItem}
               onClick={() => handleNavigation("/products")}
             >
               Products
-            </div>
+            </div> */}
             <div
               className={styles.navItem}
               onClick={() => handleNavigation("/login")}
             >
               Login
             </div>
-            <div
+            {/* <div
               className={styles.navItem}
               onClick={() => handleNavigation("a/profile")}
             >
@@ -66,15 +66,15 @@ export default function MainLayout({ children }: MainLayoutProps) {
                 size="large"
                 icon={<UserOutlined />}
               />
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className={styles.navItem}
               onClick={() => handleNavigation("/")}
             >
               <Badge count={2} color="#48757e">
                 <ShoppingCartOutlined className={styles.cartIcon} />
               </Badge>
-            </div>
+            </div> */}
           </nav>
         </Flex>
       </header>
@@ -83,55 +83,24 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <div className={styles.footerContent}>
           <div className={styles.footerLeft}>
             <img src={logoKoi} alt="Logo" className={styles.footerLogo} />
-            <Title level={4}>Koi Fish Store</Title>
+            <Title level={4} style={{ color: "white" }}>Koi Fish Store</Title>
             <ul className={styles.footerContactList}>
               <li>123 Koi Street, Fishville, FK 12345</li>
               <li>Phone: (123) 456-7890</li>
               <li>Email: info@koifishstore.com</li>
             </ul>
           </div>
-          <div className={styles.footerRight}>
-            <div className={styles.footerSection}>
-              <Title level={4}>Quick Links</Title>
-              <Space direction="vertical">
-                <Text
-                  className={styles.footerLink}
-                  onClick={() => handleNavigation("/")}
-                >
-                  Home
-                </Text>
-                <Text
-                  className={styles.footerLink}
-                  onClick={() => handleNavigation("/products")}
-                >
-                  Products
-                </Text>
-                <Text
-                  className={styles.footerLink}
-                  onClick={() => handleNavigation("/")}
-                >
-                  About Us
-                </Text>
-                <Text
-                  className={styles.footerLink}
-                  onClick={() => handleNavigation("/")}
-                >
-                  Contact
-                </Text>
-              </Space>
-            </div>
-            <div className={styles.footerSection}>
-              <Title level={4}>Follow Us</Title>
-              <Space size="large" className={styles.socialIcons}>
-                <FacebookOutlined />
-                <InstagramOutlined />
-                <TwitterOutlined />
-              </Space>
-            </div>
+          <div className={styles.footerSection}>
+            <Title level={4}>Follow Us</Title>
+            <Space size="large" className={styles.socialIcons}>
+              <FacebookOutlined />
+              <InstagramOutlined />
+              <TwitterOutlined />
+            </Space>
           </div>
         </div>
         <div className={styles.copyright}>
-          <Text>&copy; 2024 Koi Fish Store. All rights reserved.</Text>
+          <Text className={styles.copyrightText}>&copy; 2024 Koi Fish Store. All rights reserved.</Text>
         </div>
       </footer>
     </div>
