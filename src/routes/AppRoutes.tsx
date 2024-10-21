@@ -13,11 +13,12 @@ import OrderAuth from "../pages/authPage/order/Order";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import Product from "../pages/product/Product";
 import AuthLayout from "../layouts/AuthLayout";
+import UserManage from "../pages/authPage/UserMana/UserManage";
+import CouponManage from "../pages/authPage/coupon/CouponManage";
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
-      {/* Public Routes with MainLayout */}
       <Route
         path="/"
         element={
@@ -76,6 +77,26 @@ const AppRoutes: React.FC = () => {
           <MainLayout>
             <AuthLayout>
               <OrderAuth />
+            </AuthLayout>
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/a/user-manage"
+        element={
+          <MainLayout>
+            <AuthLayout>
+              <UserManage />
+            </AuthLayout>
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/a/coupon-manage"
+        element={
+          <MainLayout>
+            <AuthLayout>
+              <CouponManage />
             </AuthLayout>
           </MainLayout>
         }

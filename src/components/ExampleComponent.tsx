@@ -1,6 +1,6 @@
 import React from "react";
-import { useGetUsersQuery } from "../store/user/apiSlice";
-import { User } from "../types/user";
+import { useGetUsersQuery } from "../store/user/userSlice";
+import { User } from "../types/type";
 
 const ExampleComponent: React.FC = () => {
   const { data, error, isLoading } = useGetUsersQuery();

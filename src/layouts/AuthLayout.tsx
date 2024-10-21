@@ -2,7 +2,10 @@ import { ConfigProvider, Layout, Menu } from "antd";
 import {
   UserOutlined,
   ShoppingCartOutlined,
-  AppstoreOutlined,
+  TagsOutlined,
+  TagOutlined,
+  TeamOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
@@ -21,19 +24,32 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
       key: "profile",
       icon: <UserOutlined />,
       label: "Profile",
-      onClick: () => navigate("/a/profile"), // Navigate to Profile page
+      onClick: () => navigate("/a/profile"),
     },
     {
       key: "order",
       icon: <ShoppingCartOutlined />,
       label: "Order",
-      onClick: () => navigate("/a/order"), // Navigate to Order page
+      onClick: () => navigate("/a/order"),
     },
     {
       key: "product",
-      icon: <AppstoreOutlined />,
+      icon: <TagsOutlined />, // Changed icon
       label: "Product",
-      onClick: () => navigate("/a/product"), // Navigate to Product page
+      onClick: () => navigate("/a/product"),
+    },
+    {
+      key: "couponManage",
+      icon: <TagOutlined />, // Changed icon
+      label: "Coupon Manage",
+      onClick: () => navigate("/a/coupon-manage"),
+    },
+
+    {
+      key: "User Manage",
+      icon: <UsergroupAddOutlined />, // Changed icon
+      label: "User Manage",
+      onClick: () => navigate("/a/user-manage"),
     },
   ];
 

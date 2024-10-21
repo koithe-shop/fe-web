@@ -13,7 +13,7 @@ const LoginPage = () => {
   const handleLogin = () => {
     if (username && password) {
       dispatch(login({ id: "1", name: username, role: "admin" }));
-      navigate("a/profile");
+      navigate("/a/profile");
     } else {
       alert("Vui lòng nhập tên người dùng và mật khẩu");
     }

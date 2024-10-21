@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { User } from "../../types/user";
+import { User } from "../../types/type";
 
 // Tạo slice API với RTK Query
-export const apiSlice = createApi({
+export const userSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_URL }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], void>({
       query: () => "/users",
@@ -13,4 +13,4 @@ export const apiSlice = createApi({
 });
 
 // Export các hook để sử dụng trong các component
-export const { useGetUsersQuery } = apiSlice;
+export const { useGetUsersQuery } = userSlice;

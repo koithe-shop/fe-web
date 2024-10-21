@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Dropdown, Menu, Modal, Form, Input, Flex } from "antd";
+import { Dropdown, Menu, Modal, Form, Input, Flex } from "antd";
 import styles from "./ProfilePage.module.scss"; // Import the SCSS module
 import { SettingOutlined } from "@ant-design/icons";
 
@@ -7,7 +7,7 @@ const ProfilePage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalType, setModalType] = useState(""); // 'profile' or 'password'
 
-  const showModal = (type) => {
+  const showModal = (type: React.SetStateAction<string>) => {
     setModalType(type);
     setIsModalVisible(true);
   };
@@ -75,6 +75,9 @@ const ProfilePage = () => {
             </>
           ) : (
             <>
+              <Form.Item label="Old Password">
+                <Input.Password placeholder="Enter your old password" />
+              </Form.Item>
               <Form.Item label="New Password">
                 <Input.Password placeholder="Enter your new password" />
               </Form.Item>
