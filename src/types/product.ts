@@ -8,13 +8,11 @@ export interface Category {
   _id: string;
   categoryName: string;
   description: string;
-  __v: number;
 }
 
 export interface Genotype {
   _id: string;
   genotypeName: string;
-  __v: number;
 }
 
 export interface Product {
@@ -30,9 +28,8 @@ export interface Product {
   screeningRate: number;
   foodOnDay: number;
   description: string;
-  price: number; // Price in VND
-  image: string[]; // Array of image URLs
-  categoryId: Category; // Associated category
-  genotypeId: Genotype; // Associated genotype
-  __v: number; // Version key
+  price: number;
+  image: string[];
+  categoryId: Category;
+  genotypeId: Genotype;
 }

@@ -5,8 +5,17 @@ import { Product } from "../../types/product";
 
 // Tạo slice API với RTK Query
 export const apiSlice = createApi({
-  reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_BASE_URL }),
+  reducerPath: "productapi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_API_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    }
+  }),
   endpoints: (builder) => ({
     getOrders: builder.query<Order[], void>({
       query: () => "/orders"

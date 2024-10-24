@@ -31,3 +31,12 @@ export interface Coupon {
 export interface JwtPayload {
   [key: string]: any;
 }
+
+export interface DashboardData {
+  customers: number;
+  products: number;
+  orders: number;
+  consignmentCares: number;
+  consignmentSales: number;
+  totalRevenue: number;
+}
