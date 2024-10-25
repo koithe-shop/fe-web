@@ -1,8 +1,11 @@
-import { Form, Input, Button, Select, InputNumber, Switch, Row, Col, Spin } from "antd";
+import { Form, Input, Button, Select, InputNumber, Switch, Row, Col, Spin, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import { useGetAllCategoryQuery } from "../../../store/category/categorySlide";
 import { useGetAllGenotypeQuery } from "../../../store/genotype/genotype";
 import { useGetCustomersQuery } from "../../../store/user/userSlice";
 import { useGetProductsQuery } from "../../../store/product/apiSlice";
+import { uploadImages } from "../../../services/uploadImages";
+import { useState } from "react";
 
 const { Option } = Select;
 
@@ -16,6 +19,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialValues, onSubmit, isLo
   const { data: categories, isLoading: isLoadingCategories, error: categoryError } = useGetAllCategoryQuery();
   const { data: genotypes, isLoading: isLoadingGenotypes, error: genotypeError } = useGetAllGenotypeQuery();
   const { data: customers, isLoading: isLoadingCustomers, error: customerError } = useGetCustomersQuery();
+  const [fileList, setFileList] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const { refetch } = useGetProductsQuery();
   console.log({ customers });
 
@@ -27,37 +33,44 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialValues, onSubmit, isLo
     return <div>Error loading data!</div>;
   }
 
-  const handleFinish = (values: any) => {
-    const productData = {
-      productName: values.productName,
-      madeBy: values.madeBy,
-      gender: values.gender,
-      size: values.size,
-      yob: values.yob,
-      character: values.character,
-      certificates: {
-        origin: values.origin,
-        health_status: values.health_status,
-        awards: values.awards.split(",").map((award: string) => award.trim())
-      },
-      screeningRate: values.screeningRate,
-      foodOnDay: values.foodOnDay,
-      description: values.description,
-      price: values.price,
-      image: values.image.split(",").map((img: string) => img.trim()),
-      categoryId: values.categoryId,
-      genotypeId: values.genotypeId
-    };
-
-    console.log({ productData });
-
+  const handleFinish = async (values: any) => {
+    setLoading(true);
     try {
-      onSubmit(productData);
+      const imageUrls = fileList ? await uploadImages(fileList.map((file) => file.originFileObj)) : [];
+
+      const productData = {
+        productName: values.productName,
+        madeBy: values.madeBy,
+        gender: values.gender || false,
+        size: values.size,
+        yob: values.yob,
+        character: values.character,
+        certificates: {
+          origin: values.origin,
+          health_status: values.health_status,
+          awards: values.awards.split(",").map((award: string) => award.trim())
+        },
+        screeningRate: values.screeningRate,
+        foodOnDay: values.foodOnDay,
+        description: values.description,
+        price: values.price,
+        image: imageUrls,
+        categoryId: values.categoryId,
+        genotypeId: values.genotypeId
+      };
+
+      console.log({ productData });
+
+      await onSubmit(productData);
       refetch();
     } catch (error) {
-      console.error(error);
+      console.error("Error uploading images or submitting form:", error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const handleFileChange = ({ fileList }: { fileList: any }) => setFileList(fileList);
 
   return (
     <Spin spinning={isLoading}>
@@ -183,8 +196,16 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialValues, onSubmit, isLo
 
         <Row gutter={16}>
           <Col span={24}>
-            <Form.Item name="image" label="Hình ảnh (ngăn cách bởi dấu phẩy)">
-              <Input />
+            <Form.Item label="Hình ảnh">
+              <Upload
+                listType="picture"
+                beforeUpload={() => false} // Prevent automatic upload
+                multiple
+                fileList={fileList}
+                onChange={handleFileChange}
+              >
+                <Button icon={<UploadOutlined />}>Chọn hình ảnh</Button>
+              </Upload>
             </Form.Item>
           </Col>
         </Row>
@@ -197,8 +218,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialValues, onSubmit, isLo
         </Row>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Lưu
+          <Button type="primary" htmlType="submit" loading={loading} disabled={loading}>
+            {loading ? "Đang lưu..." : "Lưu"}
           </Button>
         </Form.Item>
       </Form>

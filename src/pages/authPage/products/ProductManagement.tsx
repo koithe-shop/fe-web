@@ -10,6 +10,7 @@ const ProductManagement: React.FC = () => {
   const [createProduct, { isLoading: isCreatingProduct }] = useCreateProductMutation();
   const [updateProduct] = useUpdateProductMutation();
   const [visible, setVisible] = useState(false);
+  console.log({ products });
 
   const handleEdit = (product: Partial<Product>) => {
     Modal.info({

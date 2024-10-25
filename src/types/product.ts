@@ -32,4 +32,5 @@ export interface Product {
   image: string[];
   categoryId: Category;
   genotypeId: Genotype;
+  ownerId: string;
 }
