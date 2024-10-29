@@ -1,61 +1,55 @@
 import React from "react";
-import { Table } from "antd";
-import { Coupon } from "../../../types/type"; // Assuming you have a Coupon type defined
+import { Table, Button } from "antd";
+import { Coupon } from "../../../types/type";
 
 interface CouponTableProps {
   filteredCoupons: Coupon[];
+  onEdit: (coupon: Coupon) => void; // Add onEdit handler for editing coupon
 }
 
-const CouponTable: React.FC<CouponTableProps> = ({ filteredCoupons }) => {
+const CouponTable: React.FC<CouponTableProps> = ({ filteredCoupons, onEdit }) => {
   const columns = [
     {
-      title: "Coupon Name",
+      title: "Tên Coupon",
       dataIndex: "couponName",
-      key: "couponName",
+      key: "couponName"
     },
     {
-      title: "Code",
+      title: "Mã",
       dataIndex: "code",
-      key: "code",
+      key: "code"
     },
     {
-      title: "Valid From",
+      title: "Ngày bắt đầu",
       dataIndex: "validFrom",
       key: "validFrom",
-      render: (text: string) => new Date(text).toLocaleString(),
+      render: (text: string) => new Date(text).toLocaleString()
     },
     {
-      title: "Valid To",
+      title: "Ngày kết thúc",
       dataIndex: "validTo",
       key: "validTo",
-      render: (text: string) => new Date(text).toLocaleString(),
+      render: (text: string) => new Date(text).toLocaleString()
     },
     {
-      title: "Discount Rate (%)",
+      title: "Tỉ lệ giảm giá (%)",
       dataIndex: "discountRate",
-      key: "discountRate",
+      key: "discountRate"
     },
     {
-      title: "Status",
+      title: "Trạng thái",
       dataIndex: "status",
       key: "status",
-      render: (status: number) => (status === 1 ? "Active" : "Inactive"),
+      render: (status: number) => (status === 1 ? "Hoạt động" : "Không hoạt động")
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-    },
+      title: "Hành động",
+      key: "action",
+      render: (text: any, record: Coupon) => <Button onClick={() => onEdit(record)}>Chỉnh sửa</Button>
+    }
   ];
 
-  return (
-    <Table
-      dataSource={filteredCoupons}
-      columns={columns}
-      rowKey="_id"
-      pagination={{ pageSize: 10 }}
-    />
-  );
+  return <Table columns={columns} dataSource={filteredCoupons} rowKey="_id" />;
 };
 
 export default CouponTable;
