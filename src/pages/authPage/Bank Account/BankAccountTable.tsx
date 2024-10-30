@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Table, Spin, Select, message } from "antd";
 import { useGetBankAccountListQuery, useChangeBankAccountStatusMutation } from "../../../store/bank/bankSlice";
 import { BankAccount } from "../../../types/bankAccount";
@@ -9,13 +9,11 @@ const BankAccountTable: React.FC = () => {
   const { data: bankAccounts, error, isLoading, refetch } = useGetBankAccountListQuery();
   console.log({ bankAccounts });
   const [changeBankAccountStatus] = useChangeBankAccountStatusMutation();
-  const [changedStatus, setChangedStatus] = useState<{ [key: string]: boolean }>({}); // Track changed status
 
   const handleChangeStatus = async (accountId: string, status: "Active" | "Inactive") => {
     try {
       await changeBankAccountStatus({ accountId, status }).unwrap(); // Call the mutation
       message.success(`Bank account status changed to ${status}`);
-      setChangedStatus((prev) => ({ ...prev, [accountId]: true })); // Mark as changed
       refetch(); // Refetch data to get updated list
     } catch (err) {
       message.error("Failed to change status");
@@ -39,17 +37,12 @@ const BankAccountTable: React.FC = () => {
     {
       title: "Status",
       dataIndex: "status",
-      render: (status: string, account: BankAccount) => {
-        const isStatusChanged = changedStatus[account._id]; // Check if status has changed
-        return isStatusChanged ? (
-          <span>{status}</span> // Show current status if changed
-        ) : (
-          <Select defaultValue={status} onChange={(newStatus) => handleChangeStatus(account._id, newStatus)} style={{ width: 120 }}>
-            <Option value="Active">Active</Option>
-            <Option value="Inactive">Inactive</Option>
-          </Select>
-        );
-      }
+      render: (status: string, account: BankAccount) => (
+        <Select defaultValue={status} onChange={(newStatus) => handleChangeStatus(account._id, newStatus)} style={{ width: 120 }}>
+          <Option value="Active">Active</Option>
+          <Option value="Inactive">Inactive</Option>
+        </Select>
+      )
     },
     {
       title: "Created At",
