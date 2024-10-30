@@ -6,6 +6,10 @@ import { couponSlice } from "./coupon/couponSlice";
 import { categorySlice } from "./category/categorySlide";
 import { genotypeSlice } from "./genotype/genotype";
 import { dashboardSlice } from "./dashboard/dashboard";
+import { consignmentCareApi } from "./consignment care/consignmentCareSlice";
+import { consignmentSaleApi } from "./consignment sale/consignmentSaleSlice";
+import { withdrawApi } from "./withdraw/withdrawSlice";
+import { bankAccountApi } from "./bank/bankSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,9 +19,13 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     [categorySlice.reducerPath]: categorySlice.reducer,
     [genotypeSlice.reducerPath]: genotypeSlice.reducer,
-    [dashboardSlice.reducerPath]: dashboardSlice.reducer
+    [dashboardSlice.reducerPath]: dashboardSlice.reducer,
+    [consignmentCareApi.reducerPath]: consignmentCareApi.reducer,
+    [consignmentSaleApi.reducerPath]: consignmentSaleApi.reducer,
+    [withdrawApi.reducerPath]: withdrawApi.reducer,
+    [bankAccountApi.reducerPath]: bankAccountApi.reducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userSlice.middleware, couponSlice.middleware, apiSlice.middleware, categorySlice.middleware, genotypeSlice.middleware, dashboardSlice.middleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userSlice.middleware, couponSlice.middleware, apiSlice.middleware, categorySlice.middleware, genotypeSlice.middleware, dashboardSlice.middleware, consignmentCareApi.middleware, consignmentSaleApi.middleware, withdrawApi.middleware, bankAccountApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

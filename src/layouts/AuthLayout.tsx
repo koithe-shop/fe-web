@@ -1,11 +1,5 @@
 import { ConfigProvider, Layout, Menu } from "antd";
-import {
-  ShoppingCartOutlined,
-  TagOutlined,
-  UsergroupAddOutlined,
-  LineChartOutlined,
-  ProductOutlined,
-} from "@ant-design/icons";
+import { ShoppingCartOutlined, TagOutlined, UsergroupAddOutlined, LineChartOutlined, ProductOutlined } from "@ant-design/icons";
 import { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import React from "react";
@@ -23,32 +17,56 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
       key: "/auth/dashboard",
       icon: <LineChartOutlined />,
       label: "Dashboard",
-      onClick: () => navigate("/auth/dashboard"),
+      onClick: () => navigate("/auth/dashboard")
     },
     {
       key: "/auth/users",
       icon: <UsergroupAddOutlined />,
       label: "Users",
-      onClick: () => navigate("/auth/users"),
+      onClick: () => navigate("/auth/users")
     },
     {
       key: "/auth/products",
       icon: <ProductOutlined />,
       label: "Products",
-      onClick: () => navigate("/auth/products"),
+      onClick: () => navigate("/auth/products")
     },
     {
       key: "/auth/orders",
       icon: <ShoppingCartOutlined />,
       label: "Orders",
-      onClick: () => navigate("/auth/orders"),
+      onClick: () => navigate("/auth/orders")
     },
     {
       key: "/auth/coupons",
       icon: <TagOutlined />,
       label: "Coupons",
-      onClick: () => navigate("/auth/coupons"),
+      onClick: () => navigate("/auth/coupons")
     },
+    {
+      key: "/auth/consignment-care",
+      icon: <LineChartOutlined />,
+      label: "Consignment Care",
+      onClick: () => navigate("/auth/consignment-care")
+    },
+    {
+      key: "/auth/consignment-sale",
+      icon: <UsergroupAddOutlined />,
+      label: "Consignment Sale",
+      onClick: () => navigate("/auth/consignment-sale")
+    },
+    {
+      key: "/auth/withdraw",
+      icon: <ProductOutlined />,
+      label: "Withdraw",
+      onClick: () => navigate("/auth/withdraw")
+    },
+    {
+      key: "/auth/bank",
+      icon: <ShoppingCartOutlined />,
+      label: "Bank",
+      onClick: () => navigate("/auth/bank")
+    }
   ];
 
   return (
@@ -58,15 +76,15 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
           theme={{
             token: {
               colorText: "#efe9cf",
-              fontSize: 18,
+              fontSize: 18
             },
             components: {
               Menu: {
                 itemSelectedBg: "#fff",
                 iconMarginInlineEnd: 20,
-                itemSelectedColor: "#333",
-              },
-            },
+                itemSelectedColor: "#333"
+              }
+            }
           }}
         >
           <Menu
@@ -75,7 +93,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
             style={{
               height: "100%",
               backgroundColor: "#4d5652",
-              fontWeight: "500",
+              fontWeight: "500"
             }}
             items={menuItems}
           />
